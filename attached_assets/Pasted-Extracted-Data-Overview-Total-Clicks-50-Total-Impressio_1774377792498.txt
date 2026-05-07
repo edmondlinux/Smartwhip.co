@@ -1,0 +1,122 @@
+Extracted Data
+
+Overview
+	•	Total Clicks: 50
+	•	Total Impressions: 2,030
+	•	Average CTR: 2.5%
+	•	Average Position: 8.6
+
+Top Queries
+
+Query	Clicks	Impressions
+smartwhip	7	496
+smart whip	2	506
+smartwhip birmingham	2	5
+smartwhips	1	69
+smartwhip manchester	1	3
+smart whips manchester	1	3
+smart whips	0	145
+smartwhip uk	0	32
+smart whips uk	0	31
+smart wip	0	24
+
+
+⸻
+
+What’s Going On ?
+
+1. You are ranking, but not converting clicks
+	•	Position 8.6 = mostly page 1 / top of page 2
+	•	CTR 2.5% is low for that position (should be ~4–8%)
+➡️ Problem = title + meta not attractive enough
+
+⸻
+
+2. Brand keyword split issue
+You’re getting impressions across:
+	•	smartwhip
+	•	smart whip
+	•	smartwhips
+	•	smart whips
+
+➡️ Google sees them as separate queries
+➡️ You’re not dominating all variations properly
+
+⸻
+
+3. High impressions, low clicks (big opportunity)
+	•	“smart whip” → 506 impressions, only 2 clicks
+	•	“smartwhip” → 496 impressions, 7 clicks
+
+➡️ These should be your main money keywords
+➡️ You’re leaking traffic
+
+⸻
+
+4. Location pages are working (early signal)
+	•	“smartwhip birmingham” → 2 clicks / 5 impressions
+	•	“manchester terms” → getting clicks
+
+➡️ Local intent pages are high converting
+➡️ You need to scale this aggressively
+
+⸻
+
+5. Drop in impressions trend
+Graph shows:
+	•	Peak around March 18
+	•	Then decline
+
+➡️ Likely causes:
+	•	Ranking fluctuation (Google testing your site)
+	•	Competitors pushing
+	•	Weak authority / backlinks
+
+⸻
+
+What To Do Next (Actionable)
+
+1. Fix CTR immediately (highest ROI)
+Rewrite title to hit intent + urgency:
+
+⸻
+
+2. Capture all keyword variations
+Add these naturally:
+	•	smartwhip
+	•	smart whip
+	•	smartwhips
+	•	smart whips UK
+
+➡️ Put in:
+	•	H1
+	•	H2
+	•	homepage intro
+	•	product pages
+
+⸻
+
+3. Internal linking
+Link all city pages → main product page
+Anchor text:
+	•	“Buy Smartwhip UK”
+	•	“Smartwhip delivery”
+
+⸻
+
+4. Fix zero-click keywords
+These:
+	•	smartwhip uk (32 impressions)
+	•	smart whips uk (31 impressions)
+
+➡️ Add “UK” strongly in title + H1
+
+⸻
+
+Bottom Line
+	•	You are ranking already (good sign)
+	•	Traffic is being lost due to low CTR + weak positioning
+	•	Local pages are your fastest growth lever
+
+If you fix CTR + scale location SEO, you can realistically:
+→ go from 50 clicks → 300–800 clicks/month quickly
