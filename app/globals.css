@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 @variant dark (&:is(.dark *));
 
+
 :root {
   --background: #080808;
   --surface: #111111;
