@@ -21,10 +21,15 @@ interface Props {
   params: Promise<{ town: string }>;
 }
 
+export const dynamicParams = true;
+export const revalidate = false;
+
 export async function generateStaticParams() {
-  return allTowns.map((town) => ({
-    town: town.city.toLowerCase().replace(/\s+/g, '-'),
-  }));
+  return allTowns
+    .filter((town) => (parseInt(town.population, 10) || 0) > 50000)
+    .map((town) => ({
+      town: town.city.toLowerCase().replace(/\s+/g, '-'),
+    }));
 }
 
 async function getTownData(townParam: string): Promise<TownMeta | null> {
