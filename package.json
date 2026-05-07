@@ -1,6 +1,9 @@
 {
   "name": "SmartWhip",
   "private": true,
+  "pnpm": {
+    "onlyBuiltDependencies": ["sharp", "@tailwindcss/oxide", "esbuild"]
+  },
   "scripts": {
     "dev": "next dev --turbopack --port 5000",
     "build": "next build",
