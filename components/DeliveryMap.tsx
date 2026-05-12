@@ -62,7 +62,7 @@ function fitBounds(mapRef: MapRef, buyer: Coords, agent: Coords) {
   const maxLat = Math.max(buyer.lat, agent.lat);
   mapRef.fitBounds(
     [[minLng, minLat], [maxLng, maxLat]],
-    { padding: 70, duration: 800 }
+    { padding: { top: 90, bottom: 90, left: 70, right: 70 }, maxZoom: 14, duration: 900 }
   );
 }
 
@@ -74,6 +74,7 @@ export default function DeliveryMap({ buyerAddress }: Props) {
   const [routeCoords, setRouteCoords] = useState<[number, number][] | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
   const mapRef = useRef<MapRef>(null);
 
   useEffect(() => {
@@ -102,14 +103,15 @@ export default function DeliveryMap({ buyerAddress }: Props) {
 
   const handleMapLoad = (ref: MapRef) => {
     mapRef.current = ref;
+    setMapLoaded(true);
   };
 
-  // Fit bounds once we have both buyer + agent coords (geocoding finishes after map load)
+  // Fit bounds once BOTH the map is ready AND we have coords — whichever arrives last
   useEffect(() => {
-    if (buyer && agent && mapRef.current) {
+    if (mapLoaded && buyer && agent && mapRef.current) {
       fitBounds(mapRef.current, buyer, agent);
     }
-  }, [buyer, agent]);
+  }, [buyer, agent, mapLoaded]);
 
   if (error) {
     return (
