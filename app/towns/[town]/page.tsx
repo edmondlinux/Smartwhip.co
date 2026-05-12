@@ -45,29 +45,28 @@ async function getTownData(townParam: string): Promise<TownMeta | null> {
 }
 
 const META_TITLE_TEMPLATES = [
-  (city: string) => `Buy SmartWhip ${city} | Fast 640g & 2kg Cream Charger Delivery`,
-  (city: string) => `SmartWhip ${city} Delivery | Same-Day 640g N₂O Cylinders`,
-  (city: string) => `Cream Chargers ${city} | SmartWhip 640g Fast Delivery`,
-  (city: string) => `Order SmartWhip in ${city} | 640g Cylinders Instant Dispatch`,
-  (city: string) => `SmartWhip ${city} | Premium N₂O Cylinders, Fast Local Delivery`,
+  'Buy SmartWhip {city} | Fast 640g & 2kg Cream Charger Delivery',
+  'SmartWhip {city} Delivery | Same-Day 640g N₂O Cylinders',
+  'Cream Chargers {city} | SmartWhip 640g Fast Delivery',
+  'Order SmartWhip in {city} | 640g Cylinders Instant Dispatch',
+  'SmartWhip {city} | Premium N₂O Cylinders, Fast Local Delivery',
 ];
 
 const META_DESC_TEMPLATES = [
-  (city: string, admin: string) =>
-    `Order genuine SmartWhip, FastGas, and Cream Deluxe 640g canisters in ${city}. Fast delivery across ${admin}. Best UK prices, 24/7 availability.`,
-  (city: string, admin: string) =>
-    `${city}'s trusted supplier for professional N₂O cream chargers. SmartWhip 640g cylinders dispatched fast across ${admin}. Contact us on WhatsApp or Telegram.`,
-  (city: string, admin: string) =>
-    `Buy SmartWhip 640g in ${city} — authentic stock, rapid local delivery, competitive prices. Serving ${admin} 24 hours a day.`,
-  (city: string, admin: string) =>
-    `Premium cream charger delivery in ${city}. SmartWhip, FastGas, Cream Deluxe — all available for fast dispatch across ${admin}.`,
-  (city: string, admin: string) =>
-    `Fastest SmartWhip delivery in ${city}. Order 640g or 2kg N₂O cylinders for same-day drop across ${admin}. Genuine stock only.`,
+  'Order genuine SmartWhip, FastGas, and Cream Deluxe 640g canisters in {city}. Fast delivery across {admin}. Best UK prices, 24/7 availability.',
+  "{city}'s trusted supplier for professional N₂O cream chargers. SmartWhip 640g cylinders dispatched fast across {admin}. Contact us on WhatsApp or Telegram.",
+  'Buy SmartWhip 640g in {city} — authentic stock, rapid local delivery, competitive prices. Serving {admin} 24 hours a day.',
+  'Premium cream charger delivery in {city}. SmartWhip, FastGas, Cream Deluxe — all available for fast dispatch across {admin}.',
+  'Fastest SmartWhip delivery in {city}. Order 640g or 2kg N₂O cylinders for same-day drop across {admin}. Genuine stock only.',
 ];
 
 function seedPick<T>(arr: T[], city: string, offset = 0): T {
   const s = city.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
   return arr[(s + offset) % arr.length];
+}
+
+function fillTemplate(template: string, city: string, admin = ''): string {
+  return template.replace(/\{city\}/g, city).replace(/\{admin\}/g, admin);
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -77,8 +76,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { city, admin_name } = townData;
   const baseUrl = process.env.BASE_URL || 'https://smartwhip.co';
 
-  const title = seedPick(META_TITLE_TEMPLATES, city)(city);
-  const description = seedPick(META_DESC_TEMPLATES, city, 2)(city, admin_name);
+  const title = fillTemplate(seedPick(META_TITLE_TEMPLATES, city), city);
+  const description = fillTemplate(seedPick(META_DESC_TEMPLATES, city, 2), city, admin_name);
 
   return {
     title,
