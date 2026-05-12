@@ -3,8 +3,9 @@
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Copy, Check, Upload, ShieldCheck } from 'lucide-react';
-import { Loader2 } from 'lucide-react';
+import { ArrowLeft, Copy, Check, Upload, ShieldCheck, Loader2 } from 'lucide-react';
+import { getBankDetailsAction } from '@/app/actions/bank';
+import type { BankDetailRow } from '@/app/actions/bank';
 
 function PaymentPageInner() {
   const searchParams = useSearchParams();
@@ -17,6 +18,14 @@ function PaymentPageInner() {
 
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [receiptName, setReceiptName] = useState<string | null>(null);
+  const [dbBankDetails, setDbBankDetails] = useState<BankDetailRow[]>([]);
+  const [loadingBank, setLoadingBank] = useState(true);
+
+  useEffect(() => {
+    getBankDetailsAction()
+      .then(rows => setDbBankDetails(rows))
+      .finally(() => setLoadingBank(false));
+  }, []);
 
   const copyToClipboard = async (value: string, field: string) => {
     try {
@@ -26,10 +35,9 @@ function PaymentPageInner() {
     } catch { /* noop */ }
   };
 
-  const bankDetails = [
-    { label: 'Account Name', value: 'SmartWhip UK Ltd' },
-    { label: 'Sort Code', value: '20-45-67' },
-    { label: 'Account Number', value: '83921047' },
+  // Merge DB rows with computed fields (Amount + Reference)
+  const bankDetails: BankDetailRow[] = [
+    ...dbBankDetails,
     { label: 'Amount to Pay', value: `£${total.toFixed(2)}` },
     { label: 'Reference', value: name ? `SW-${name.replace(/\s+/g, '').toUpperCase().slice(0, 6)}` : 'SWORDER' },
   ];
@@ -106,38 +114,45 @@ function PaymentPageInner() {
                 Bank Transfer Details
               </span>
             </div>
-            {bankDetails.map((item) => (
-              <div
-                key={item.label}
-                className="flex items-center justify-between px-5 py-4 border-b last:border-0"
-                style={{ borderColor: 'var(--border-subtle)', background: 'var(--surface)' }}
-              >
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-widest block" style={{ color: 'var(--muted-dim)' }}>
-                    {item.label}
-                  </span>
-                  <span className="text-sm font-black uppercase tracking-tight" style={{ color: 'var(--foreground)' }}>
-                    {item.value}
-                  </span>
-                </div>
-                <button
-                  onClick={() => copyToClipboard(item.value, item.label)}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all"
-                  style={{
-                    background: copiedField === item.label ? 'rgba(34,197,94,0.1)' : 'var(--surface-elevated)',
-                    color: copiedField === item.label ? 'rgb(34,197,94)' : 'var(--muted)',
-                    border: '1px solid',
-                    borderColor: copiedField === item.label ? 'rgba(34,197,94,0.3)' : 'var(--border)',
-                  }}
-                >
-                  {copiedField === item.label ? (
-                    <><Check className="h-3 w-3" /> Copied</>
-                  ) : (
-                    <><Copy className="h-3 w-3" /> Copy</>
-                  )}
-                </button>
+
+            {loadingBank ? (
+              <div className="flex items-center justify-center py-10" style={{ background: 'var(--surface)' }}>
+                <Loader2 className="h-5 w-5 animate-spin" style={{ color: 'var(--orange)' }} />
               </div>
-            ))}
+            ) : (
+              bankDetails.map((item) => (
+                <div
+                  key={item.label}
+                  className="flex items-center justify-between px-5 py-4 border-b last:border-0"
+                  style={{ borderColor: 'var(--border-subtle)', background: 'var(--surface)' }}
+                >
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-widest block" style={{ color: 'var(--muted-dim)' }}>
+                      {item.label}
+                    </span>
+                    <span className="text-sm font-black uppercase tracking-tight" style={{ color: 'var(--foreground)' }}>
+                      {item.value}
+                    </span>
+                  </div>
+                  <button
+                    onClick={() => copyToClipboard(item.value, item.label)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all"
+                    style={{
+                      background: copiedField === item.label ? 'rgba(34,197,94,0.1)' : 'var(--surface-elevated)',
+                      color: copiedField === item.label ? 'rgb(34,197,94)' : 'var(--muted)',
+                      border: '1px solid',
+                      borderColor: copiedField === item.label ? 'rgba(34,197,94,0.3)' : 'var(--border)',
+                    }}
+                  >
+                    {copiedField === item.label ? (
+                      <><Check className="h-3 w-3" /> Copied</>
+                    ) : (
+                      <><Copy className="h-3 w-3" /> Copy</>
+                    )}
+                  </button>
+                </div>
+              ))
+            )}
           </div>
 
           {/* Upload receipt */}
