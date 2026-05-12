@@ -9,7 +9,7 @@ if (!connectionString) throw new Error('NEXT_NOENDB_URI is not set');
 const sql = neon(connectionString);
 
 async function main() {
-  console.log('Creating bank_details table in Neon...');
+  console.log('Setting up Neon tables...');
 
   await sql`
     CREATE TABLE IF NOT EXISTS bank_details (
@@ -23,13 +23,19 @@ async function main() {
     )
   `;
 
-  console.log('Table created. Checking for existing rows...');
+  await sql`
+    CREATE TABLE IF NOT EXISTS app_settings (
+      id SERIAL PRIMARY KEY,
+      key VARCHAR(100) NOT NULL UNIQUE,
+      value TEXT NOT NULL,
+      updated_at TIMESTAMP NOT NULL DEFAULT NOW()
+    )
+  `;
 
-  const existing = await sql`SELECT COUNT(*) AS count FROM bank_details`;
-  const count = Number(existing[0].count);
+  console.log('Tables ready. Seeding...');
 
-  if (count === 0) {
-    console.log('Seeding bank details...');
+  const bankCount = await sql`SELECT COUNT(*) AS count FROM bank_details`;
+  if (Number(bankCount[0].count) === 0) {
     await sql`
       INSERT INTO bank_details (label, value, sort_order) VALUES
         ('Account Name',   'SmartWhip UK Ltd', 1),
@@ -37,11 +43,23 @@ async function main() {
         ('Account Number', '83921047',         3),
         ('Bank',           'Barclays Bank',    4)
     `;
-    console.log('Seeded 4 bank detail rows.');
-  } else {
-    console.log(`Skipped seeding — ${count} row(s) already exist.`);
+    console.log('Seeded bank details.');
   }
 
+  const defaults = [
+    { key: 'checkout_mode',  value: 'bank' },
+    { key: 'whatsapp_url',   value: 'https://wa.me/447476690829' },
+    { key: 'telegram_url',   value: 'https://t.me/smartwhipsuk' },
+  ];
+
+  for (const { key, value } of defaults) {
+    await sql`
+      INSERT INTO app_settings (key, value)
+      VALUES (${key}, ${value})
+      ON CONFLICT (key) DO NOTHING
+    `;
+  }
+  console.log('Seeded app settings.');
   console.log('Done.');
   process.exit(0);
 }

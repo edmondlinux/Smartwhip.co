@@ -5,10 +5,9 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Search, MapPin, ArrowRight, Loader2, MessageCircle, Send, ChevronDown, ArrowLeft, X, ShoppingCart } from 'lucide-react';
 import { searchTownsAction } from '@/app/actions';
+import { getAppSettings } from '@/app/actions/admin';
+import type { AppSettings } from '@/app/actions/admin';
 import { usePostHog } from 'posthog-js/react';
-
-const WHATSAPP_BASE = process.env.NEXT_PUBLIC_WHATSAPP_URL || 'https://wa.me/447476690829';
-const TELEGRAM_BASE = process.env.NEXT_PUBLIC_TELEGRAM_URL || 'https://t.me/smartwhipsuk';
 
 const BRANDS = ['SmartWhip', 'FastGas', 'Cream Deluxe', 'GoldWhip'];
 
@@ -56,20 +55,16 @@ const BRAND_COLORS: Record<string, string> = {
   GoldWhip: 'rgb(245,158,11)',
 };
 
-function buildWhatsAppLink(brand: string, town: string): string {
+function buildWhatsAppLink(brand: string, town: string, base: string): string {
   const msg = `Hello, I would like to order ${brand} 640g to ${town}. Can you help with pricing and delivery time?`;
   const encoded = encodeURIComponent(msg);
-  return WHATSAPP_BASE.includes('?')
-    ? `${WHATSAPP_BASE}&text=${encoded}`
-    : `${WHATSAPP_BASE}?text=${encoded}`;
+  return base.includes('?') ? `${base}&text=${encoded}` : `${base}?text=${encoded}`;
 }
 
-function buildTelegramLink(brand: string, town: string): string {
+function buildTelegramLink(brand: string, town: string, base: string): string {
   const msg = `Hello, I would like to order ${brand} 640g to ${town}. Can you help with pricing and delivery time?`;
   const encoded = encodeURIComponent(msg);
-  return TELEGRAM_BASE.includes('?')
-    ? `${TELEGRAM_BASE}&text=${encoded}`
-    : `${TELEGRAM_BASE}?text=${encoded}`;
+  return base.includes('?') ? `${base}&text=${encoded}` : `${base}?text=${encoded}`;
 }
 
 interface TownResult {
@@ -94,11 +89,13 @@ function OrderPageInner() {
   const [noResults, setNoResults] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const brandRef = useRef<HTMLDivElement>(null);
+  const [appSettings, setAppSettings] = useState<AppSettings | null>(null);
 
   const brandColor = BRAND_COLORS[selectedBrand] ?? 'var(--orange)';
 
   useEffect(() => {
     ph?.capture('order_page_entered', { brand: selectedBrand });
+    getAppSettings().then(setAppSettings);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -456,44 +453,66 @@ function OrderPageInner() {
                 </p>
               </div>
 
-              {/* CTA buttons */}
+              {/* CTA buttons — driven by checkout mode from admin panel */}
               <div className="flex flex-col gap-3">
-                {/* Primary Order Now button */}
-                <Link
-                  href={`/order/checkout?brand=${encodeURIComponent(selectedBrand)}&town=${encodeURIComponent(selectedTown.name)}&admin=${encodeURIComponent(selectedTown.admin)}`}
-                  onClick={() => ph?.capture('order_now_clicked', { town: selectedTown.name, brand: selectedBrand })}
-                  className="flex items-center justify-center gap-2.5 py-4 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all hover:opacity-90 active:scale-[0.98]"
-                  style={{ background: 'var(--orange)' }}
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                  Order Now
-                </Link>
-
-                {/* Disabled social buttons */}
-                <div className="flex flex-col gap-2">
-                  <button
-                    disabled
-                    className="flex items-center justify-center gap-2.5 py-3.5 rounded-2xl text-sm font-black uppercase tracking-widest cursor-not-allowed"
-                    style={{ background: 'rgba(37,211,102,0.15)', color: 'rgba(37,211,102,0.45)', border: '1px solid rgba(37,211,102,0.2)' }}
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    Order via WhatsApp
-                    <span className="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ml-1" style={{ background: 'rgba(37,211,102,0.15)' }}>
-                      Soon
-                    </span>
-                  </button>
-                  <button
-                    disabled
-                    className="flex items-center justify-center gap-2.5 py-3.5 rounded-2xl text-sm font-black uppercase tracking-widest cursor-not-allowed"
-                    style={{ background: 'rgba(0,136,204,0.12)', color: 'rgba(0,136,204,0.4)', border: '1px solid rgba(0,136,204,0.18)' }}
-                  >
-                    <Send className="h-4 w-4" />
-                    Order via Telegram
-                    <span className="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ml-1" style={{ background: 'rgba(0,136,204,0.15)' }}>
-                      Soon
-                    </span>
-                  </button>
-                </div>
+                {!appSettings ? (
+                  <div className="flex items-center justify-center py-6">
+                    <Loader2 className="h-5 w-5 animate-spin" style={{ color: 'var(--orange)' }} />
+                  </div>
+                ) : appSettings.checkoutMode === 'bank' ? (
+                  /* ── BANK CHECKOUT MODE ── */
+                  <>
+                    <Link
+                      href={`/order/checkout?brand=${encodeURIComponent(selectedBrand)}&town=${encodeURIComponent(selectedTown.name)}&admin=${encodeURIComponent(selectedTown.admin)}`}
+                      onClick={() => ph?.capture('order_now_clicked', { town: selectedTown.name, brand: selectedBrand })}
+                      className="flex items-center justify-center gap-2.5 py-4 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all hover:opacity-90 active:scale-[0.98]"
+                      style={{ background: 'var(--orange)' }}
+                    >
+                      <ShoppingCart className="h-4 w-4" />
+                      Order Now
+                    </Link>
+                    <div className="flex flex-col gap-2">
+                      <button disabled className="flex items-center justify-center gap-2.5 py-3.5 rounded-2xl text-sm font-black uppercase tracking-widest cursor-not-allowed"
+                        style={{ background: 'rgba(37,211,102,0.15)', color: 'rgba(37,211,102,0.45)', border: '1px solid rgba(37,211,102,0.2)' }}>
+                        <MessageCircle className="h-4 w-4" />
+                        Order via WhatsApp
+                        <span className="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ml-1" style={{ background: 'rgba(37,211,102,0.15)' }}>Soon</span>
+                      </button>
+                      <button disabled className="flex items-center justify-center gap-2.5 py-3.5 rounded-2xl text-sm font-black uppercase tracking-widest cursor-not-allowed"
+                        style={{ background: 'rgba(0,136,204,0.12)', color: 'rgba(0,136,204,0.4)', border: '1px solid rgba(0,136,204,0.18)' }}>
+                        <Send className="h-4 w-4" />
+                        Order via Telegram
+                        <span className="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ml-1" style={{ background: 'rgba(0,136,204,0.15)' }}>Soon</span>
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  /* ── SOCIAL MODE ── */
+                  <>
+                    <a
+                      href={buildWhatsAppLink(selectedBrand, selectedTown.name, appSettings.whatsappUrl)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => ph?.capture('whatsapp_clicked', { button_type: 'order-page', town: selectedTown.name, brand: selectedBrand, source_page: 'order' })}
+                      className="flex items-center justify-center gap-2.5 py-4 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all hover:opacity-90 active:scale-[0.98]"
+                      style={{ background: '#25D366' }}
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      Order via WhatsApp
+                    </a>
+                    <a
+                      href={buildTelegramLink(selectedBrand, selectedTown.name, appSettings.telegramUrl)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => ph?.capture('telegram_clicked', { button_type: 'order-page', town: selectedTown.name, brand: selectedBrand, source_page: 'order' })}
+                      className="flex items-center justify-center gap-2.5 py-4 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all hover:opacity-90 active:scale-[0.98]"
+                      style={{ background: '#0088cc' }}
+                    >
+                      <Send className="h-4 w-4" />
+                      Order via Telegram
+                    </a>
+                  </>
+                )}
               </div>
 
               {/* What happens next */}
