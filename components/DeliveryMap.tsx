@@ -6,17 +6,19 @@ import type { MapRef } from 'react-map-gl/mapbox';
 import { Loader2 } from 'lucide-react';
 
 const AGENT_KEY = 'sw_agent_loc_v1';
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN ?? '';
 
 interface Coords { lat: number; lng: number }
 
-/* ── Geocode address via Nominatim (already used elsewhere in app) ── */
+/* ── Geocode address via Mapbox (token already available in browser) ── */
 async function geocodeAddress(address: string): Promise<Coords | null> {
   try {
-    const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json&limit=1&countrycodes=gb`;
-    const res = await fetch(url, { headers: { 'User-Agent': 'SmartWhip-App' } });
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?country=GB&limit=1&access_token=${MAPBOX_TOKEN}`;
+    const res = await fetch(url);
     const data = await res.json();
-    if (!data?.[0]) return null;
-    return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) };
+    const center = data.features?.[0]?.center;
+    if (!center) return null;
+    return { lng: center[0], lat: center[1] };
   } catch {
     return null;
   }
