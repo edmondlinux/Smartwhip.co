@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Search, MapPin, ArrowRight, Loader2, MessageCircle, Send, ChevronDown, ArrowLeft, X } from 'lucide-react';
+import { Search, MapPin, ArrowRight, Loader2, MessageCircle, Send, ChevronDown, ArrowLeft, X, ShoppingCart } from 'lucide-react';
 import { searchTownsAction } from '@/app/actions';
 import { usePostHog } from 'posthog-js/react';
 
@@ -458,28 +458,42 @@ function OrderPageInner() {
 
               {/* CTA buttons */}
               <div className="flex flex-col gap-3">
-                <a
-                  href={buildWhatsAppLink(selectedBrand, selectedTown.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => ph?.capture('whatsapp_clicked', { button_type: 'order-page', town: selectedTown.name, brand: selectedBrand, source_page: 'order' })}
+                {/* Primary Order Now button */}
+                <Link
+                  href={`/order/checkout?brand=${encodeURIComponent(selectedBrand)}&town=${encodeURIComponent(selectedTown.name)}&admin=${encodeURIComponent(selectedTown.admin)}`}
+                  onClick={() => ph?.capture('order_now_clicked', { town: selectedTown.name, brand: selectedBrand })}
                   className="flex items-center justify-center gap-2.5 py-4 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all hover:opacity-90 active:scale-[0.98]"
-                  style={{ background: '#25D366' }}
+                  style={{ background: 'var(--orange)' }}
                 >
-                  <MessageCircle className="h-4 w-4" />
-                  Order via WhatsApp
-                </a>
-                <a
-                  href={buildTelegramLink(selectedBrand, selectedTown.name)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => ph?.capture('telegram_clicked', { button_type: 'order-page', town: selectedTown.name, brand: selectedBrand, source_page: 'order' })}
-                  className="flex items-center justify-center gap-2.5 py-4 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all hover:opacity-90 active:scale-[0.98]"
-                  style={{ background: '#0088cc' }}
-                >
-                  <Send className="h-4 w-4" />
-                  Order via Telegram
-                </a>
+                  <ShoppingCart className="h-4 w-4" />
+                  Order Now
+                </Link>
+
+                {/* Disabled social buttons */}
+                <div className="flex flex-col gap-2">
+                  <button
+                    disabled
+                    className="flex items-center justify-center gap-2.5 py-3.5 rounded-2xl text-sm font-black uppercase tracking-widest cursor-not-allowed"
+                    style={{ background: 'rgba(37,211,102,0.15)', color: 'rgba(37,211,102,0.45)', border: '1px solid rgba(37,211,102,0.2)' }}
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Order via WhatsApp
+                    <span className="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ml-1" style={{ background: 'rgba(37,211,102,0.15)' }}>
+                      Soon
+                    </span>
+                  </button>
+                  <button
+                    disabled
+                    className="flex items-center justify-center gap-2.5 py-3.5 rounded-2xl text-sm font-black uppercase tracking-widest cursor-not-allowed"
+                    style={{ background: 'rgba(0,136,204,0.12)', color: 'rgba(0,136,204,0.4)', border: '1px solid rgba(0,136,204,0.18)' }}
+                  >
+                    <Send className="h-4 w-4" />
+                    Order via Telegram
+                    <span className="text-[9px] font-black uppercase tracking-widest px-1.5 py-0.5 rounded ml-1" style={{ background: 'rgba(0,136,204,0.15)' }}>
+                      Soon
+                    </span>
+                  </button>
+                </div>
               </div>
 
               {/* What happens next */}
