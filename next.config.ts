@@ -8,8 +8,6 @@ const nextConfig: NextConfig = {
     serverActions: {
       allowedOrigins: ['*']
     },
-    workerThreads: true,
-    cpus: 4,
   },
   turbopack: {
     root: path.resolve(__dirname),
