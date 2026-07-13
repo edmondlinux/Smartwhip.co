@@ -704,6 +704,69 @@ export default async function TownPage({ params }: Props) {
                 </div>
               </div>
             )}
+            {/* Related Guides */}
+            <div className="rounded-3xl border p-8" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+              <span className="text-[10px] font-black uppercase tracking-[0.25em]" style={{ color: 'var(--orange)' }}>
+                Useful Guides
+              </span>
+              <h2 className="text-xl font-black uppercase tracking-tight mt-2 mb-5" style={{ color: 'var(--foreground)' }}>
+                Cream Charger Guides &amp; Reviews
+              </h2>
+              <div className="space-y-3">
+                {[
+                  {
+                    href: '/blog/how-to-use-whipped-cream-dispenser-step-by-step',
+                    title: 'How to Use a Whipped Cream Dispenser (Step-by-Step)',
+                    desc: 'Complete guide to setting up, charging, and cleaning your dispenser with a 640g cylinder.',
+                    tag: 'Guide',
+                  },
+                  {
+                    href: '/blog/smartwhip-vs-fastgas-vs-cream-deluxe',
+                    title: 'SmartWhip vs FastGas vs Cream Deluxe: Which Is Best?',
+                    desc: 'Head-to-head comparison of the three top UK cream charger brands in 2026.',
+                    tag: 'Comparison',
+                  },
+                  {
+                    href: '/blog/best-cream-chargers-uk-2026',
+                    title: 'Best Cream Chargers UK 2026: Full Brand Rankings',
+                    desc: 'Every major brand ranked across quality, price, and real-world reliability.',
+                    tag: 'Review',
+                  },
+                  {
+                    href: '/blog/640g-cream-charger-vs-8g-cartridges',
+                    title: '640g Cream Charger vs 8g Cartridges: Which Should You Use?',
+                    desc: 'Why professional kitchens are switching from single-use to 640g cylinders.',
+                    tag: 'Guide',
+                  },
+                ].map((guide, i) => (
+                  <Link
+                    key={i}
+                    href={guide.href}
+                    className="flex items-start gap-4 p-4 rounded-2xl border transition-all hover:border-orange-500"
+                    style={{ borderColor: 'var(--border)', background: 'var(--surface-elevated)' }}
+                  >
+                    <div className="flex-grow">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span
+                          className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full"
+                          style={{ background: 'rgba(255,98,0,0.12)', color: 'var(--orange)' }}
+                        >
+                          {guide.tag}
+                        </span>
+                      </div>
+                      <div className="text-sm font-black tracking-tight mb-1" style={{ color: 'var(--foreground)' }}>
+                        {guide.title}
+                      </div>
+                      <p className="text-xs font-medium leading-relaxed" style={{ color: 'var(--muted)' }}>
+                        {guide.desc}
+                      </p>
+                    </div>
+                    <div className="flex-shrink-0 pt-1" style={{ color: 'var(--muted)' }}>→</div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
           </div>
 
           {/* RIGHT — sticky order panel */}

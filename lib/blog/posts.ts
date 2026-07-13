@@ -101,13 +101,13 @@ If you are still running through boxes of 8g cartridges, it is time to make the 
 
   {
     slug: 'smartwhip-vs-fastgas-vs-cream-deluxe',
-    title: 'SmartWhip vs FastGas vs Cream Deluxe: Which Brand Is Best in 2025?',
-    description: 'Compare SmartWhip, FastGas, and Cream Deluxe cream charger cylinders side by side. Purity, pricing, availability, and which is best for professional UK catering use.',
+    title: 'SmartWhip vs FastGas vs Cream Deluxe 2026: Which Is Best? Honest UK Review',
+    description: 'SmartWhip vs FastGas vs Cream Deluxe — compared head-to-head in 2026. Purity, price, pressure, and which 640g cream charger brand wins for UK professionals. Updated June 2026.',
     excerpt: 'Three brands dominate the UK 640g N₂O cylinder market: SmartWhip, FastGas, and Cream Deluxe. Here is how they compare across the metrics that actually matter.',
     category: 'Comparisons',
-    tags: ['SmartWhip vs FastGas', 'cream charger comparison', 'FastGas UK', 'Cream Deluxe', 'best cream chargers UK 2025'],
+    tags: ['SmartWhip vs FastGas', 'cream charger comparison', 'FastGas UK', 'Cream Deluxe', 'best cream chargers UK 2026'],
     publishedAt: '2025-11-28',
-    updatedAt: '2026-02-01',
+    updatedAt: '2026-06-01',
     readTime: 8,
     sections: [
       {
@@ -418,13 +418,13 @@ The result is dramatically faster delivery than standard postal or parcel servic
 
   {
     slug: 'goldwhip-640g-review',
-    title: 'GoldWhip 640g Review: Is It Worth Buying in the UK?',
-    description: 'An honest GoldWhip 640g review for UK buyers. Covers purity, build quality, regulator compatibility, pricing, and how it compares to SmartWhip and FastGas in 2026.',
+    title: 'GoldWhip 640g Review 2026: What Is GoldWhip & Is It Worth It? | UK Verdict',
+    description: 'What is GoldWhip? Our honest 2026 review of the GoldWhip 640g N₂O cream charger — purity, build, price, and how it compares to SmartWhip and FastGas. UK buyers guide.',
     excerpt: 'GoldWhip has built a quiet following among UK catering professionals as a no-nonsense alternative to the bigger brands. But how does it actually perform? We take a close look.',
     category: 'Reviews',
-    tags: ['GoldWhip review', 'GoldWhip 640g', 'GoldWhip UK', 'cream charger review 2026', 'N2O cylinder UK'],
+    tags: ['GoldWhip', 'what is GoldWhip', 'GoldWhip 640g', 'GoldWhip UK', 'cream charger review 2026', 'N2O cylinder UK'],
     publishedAt: '2026-02-05',
-    updatedAt: '2026-03-01',
+    updatedAt: '2026-06-01',
     readTime: 6,
     sections: [
       {
@@ -1010,13 +1010,13 @@ For planned bulk orders, case packs (6 × 640g for £130) offer the best per-uni
 
   {
     slug: 'how-to-use-whipped-cream-dispenser-step-by-step',
-    title: 'How to Use a Whipped Cream Dispenser with N₂O Chargers: Step-by-Step UK Guide',
-    description: 'A complete step-by-step guide to using a whipped cream dispenser with food-grade N2O chargers in the UK. Covers filling, charging, dispensing, cleaning, and troubleshooting.',
+    title: 'How to Use a Whipped Cream Dispenser (Step-by-Step) — SmartWhip 640g UK Guide',
+    description: 'How to use a whipped cream dispenser with a SmartWhip or FastGas 640g N₂O charger — full step-by-step guide covering setup, charging, dispensing, and cleaning. UK professionals.',
     excerpt: 'Getting the best from your whipped cream dispenser requires the right technique from fill to clean. This step-by-step guide covers everything UK catering professionals and home cooks need to know.',
     category: 'Guides',
-    tags: ['how to use cream chargers uk', 'whipped cream dispenser instructions', 'how to charge cream whipper smartwhip', 'cream charger how to use', 'whipped cream dispenser guide'],
+    tags: ['how to use whipped cream dispenser', 'how to use cream chargers uk', 'whipped cream dispenser instructions', 'how to charge cream whipper smartwhip', 'cream charger how to use'],
     publishedAt: '2025-12-22',
-    updatedAt: '2026-02-28',
+    updatedAt: '2026-06-01',
     readTime: 7,
     sections: [
       {

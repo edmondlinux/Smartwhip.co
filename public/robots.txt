@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /
+
 Sitemap: https://smartwhip.co/sitemap.xml
+Sitemap: https://smartwhip.co/sitemap-england.xml
+Sitemap: https://smartwhip.co/sitemap-scotland.xml
+Sitemap: https://smartwhip.co/sitemap-wales.xml
+Sitemap: https://smartwhip.co/sitemap-northern-ireland.xml
+Sitemap: https://smartwhip.co/sitemap-blog.xml
