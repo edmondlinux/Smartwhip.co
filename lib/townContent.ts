@@ -177,6 +177,30 @@ const FAQ_POOL = [
     q: `Is SmartWhip legal to buy in the UK?`,
     a: `Nitrous oxide for culinary and catering use is legal in the UK for professional and commercial purposes. Our products are sold strictly for food preparation and professional catering use across ${city} and ${admin}.`,
   }),
+  (city: string, admin: string) => ({
+    q: `Where can I find cream chargers near me in ${city}?`,
+    a: `You're already in the right place. We are the closest on-demand cream charger supplier to ${city}, operating 24/7. No need to visit a shop — message us on WhatsApp or Telegram and we'll deliver directly to your door in ${city}.`,
+  }),
+  (city: string, admin: string) => ({
+    q: `Do you offer same day delivery of cream chargers in ${city}?`,
+    a: `Yes — same day delivery is our standard for ${city}. Once you place your order, we confirm and dispatch within the hour. Most ${city} customers receive their order within the same day, often within a couple of hours.`,
+  }),
+  (city: string, admin: string) => ({
+    q: `How do I use a SmartWhip 640g cylinder?`,
+    a: `You'll need a compatible pressure regulator to connect the 640g cylinder to your whipped cream dispenser. Attach the regulator, connect your dispenser, open the valve slowly, and charge. The 640g gives consistent pressure across the full fill. If you're new to 640g cylinders, message us — we're happy to walk you through it.`,
+  }),
+  (city: string, admin: string) => ({
+    q: `Can I get NOS delivery in ${city}?`,
+    a: `Yes. We deliver N₂O (nitrous oxide) cream chargers directly in ${city} for professional culinary and catering use. Our stock includes SmartWhip, FastGas, and Cream Deluxe cylinders — all food-grade and certified for professional use.`,
+  }),
+  (city: string, admin: string) => ({
+    q: `What is the fastest way to order cream chargers in ${city}?`,
+    a: `The fastest way is via WhatsApp. Send us a message with your address in ${city} and what you need — we respond within minutes and dispatch the same day. Telegram is also available if you prefer.`,
+  }),
+  (city: string, admin: string) => ({
+    q: `Do you deliver cream chargers to ${city} at night?`,
+    a: `Yes — we operate around the clock including late nights and early mornings. Many of our ${city} orders come in during evening catering shifts. Just message us whenever you need, and we'll sort your delivery.`,
+  }),
 ];
 
 const TESTIMONIALS = [

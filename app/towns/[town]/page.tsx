@@ -45,19 +45,21 @@ async function getTownData(townParam: string): Promise<TownMeta | null> {
 }
 
 const META_TITLE_TEMPLATES = [
-  'Buy SmartWhip {city} | Fast 640g & 2kg Cream Charger Delivery',
-  'SmartWhip {city} Delivery | Same-Day 640g N₂O Cylinders',
-  'Cream Chargers {city} | SmartWhip 640g Fast Delivery',
-  'Order SmartWhip in {city} | 640g Cylinders Instant Dispatch',
-  'SmartWhip {city} | Premium N₂O Cylinders, Fast Local Delivery',
+  'Cream Chargers {city} | Same Day Delivery | SmartWhip From £30',
+  'SmartWhip {city} | Same-Day Cream Charger Delivery Near You',
+  'Buy Cream Chargers Near Me in {city} | SmartWhip 640g Fast Delivery',
+  'NOS Delivery {city} | SmartWhip 640g Same Day — From £30',
+  'SmartWhip {city} | Cream Chargers Delivered Today | 24/7',
+  'Cream Chargers Same Day Delivery {city} | SmartWhip & FastGas',
 ];
 
 const META_DESC_TEMPLATES = [
-  'Order genuine SmartWhip, FastGas, and Cream Deluxe 640g canisters in {city}. Fast delivery across {admin}. Best UK prices, 24/7 availability.',
-  "{city}'s trusted supplier for professional N₂O cream chargers. SmartWhip 640g cylinders dispatched fast across {admin}. Contact us on WhatsApp or Telegram.",
-  'Buy SmartWhip 640g in {city} — authentic stock, rapid local delivery, competitive prices. Serving {admin} 24 hours a day.',
-  'Premium cream charger delivery in {city}. SmartWhip, FastGas, Cream Deluxe — all available for fast dispatch across {admin}.',
-  'Fastest SmartWhip delivery in {city}. Order 640g or 2kg N₂O cylinders for same-day drop across {admin}. Genuine stock only.',
+  'Looking for cream chargers near you in {city}? We deliver SmartWhip 640g same day across {admin}. From £30. Order via WhatsApp or Telegram — 24/7.',
+  "Same day cream charger delivery in {city}. SmartWhip, FastGas & Cream Deluxe 640g cylinders dispatched fast across {admin}. Genuine stock. From £30.",
+  'Buy SmartWhip 640g in {city} — same day delivery, authentic stock, best UK prices. Serving {admin} 24 hours a day. Order now on WhatsApp.',
+  'Need cream chargers near you in {city}? We deliver SmartWhip, FastGas, and Cream Deluxe 640g to any postcode in {admin}. Same day, from £30.',
+  'SmartWhip same day delivery in {city}. 640g N₂O cylinders, 99.9% pure, TUV certified. Fast dispatch across {admin} — 24/7, from £30.',
+  'Fastest cream charger delivery near {city}. SmartWhip & FastGas 640g cylinders — same day drop across {admin}. Order on WhatsApp now.',
 ];
 
 function seedPick<T>(arr: T[], city: string, offset = 0): T {
@@ -559,6 +561,51 @@ export default async function TownPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Near Me / How to Order */}
+            <div className="rounded-3xl border p-8" style={{ background: 'var(--surface)', borderColor: 'var(--border)' }}>
+              <span className="text-[10px] font-black uppercase tracking-[0.25em]" style={{ color: 'var(--orange)' }}>
+                Cream Chargers Near You
+              </span>
+              <h2 className="text-2xl font-black uppercase tracking-tight mt-2 mb-4" style={{ color: 'var(--foreground)' }}>
+                Same Day Cream Charger Delivery in {townData.city}
+              </h2>
+              <p className="text-sm font-medium leading-relaxed mb-6" style={{ color: 'var(--muted)' }}>
+                If you&apos;re searching for cream chargers near you in {townData.city}, you&apos;ve found the right supplier.
+                We deliver SmartWhip, FastGas, and Cream Deluxe 640g N₂O cylinders directly to any address in {townData.city}
+                and across {townData.admin_name} — the same day you order, 24 hours a day. No shop visit, no waiting. Just
+                message us on WhatsApp or Telegram with your postcode and we&apos;ll have your order on the way.
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  {
+                    step: '01',
+                    title: 'Message Us',
+                    desc: `Send your address in ${townData.city} and what you need via WhatsApp or Telegram.`,
+                  },
+                  {
+                    step: '02',
+                    title: 'We Confirm',
+                    desc: 'We reply within minutes, confirm stock and dispatch time.',
+                  },
+                  {
+                    step: '03',
+                    title: 'Same Day Drop',
+                    desc: `Your cream chargers arrive in ${townData.city} the same day — often within ${content.deliveryTime} minutes.`,
+                  },
+                ].map((s, i) => (
+                  <div
+                    key={i}
+                    className="rounded-2xl border p-5"
+                    style={{ background: 'var(--surface-elevated)', borderColor: 'var(--border)' }}
+                  >
+                    <div className="text-2xl font-black mb-2" style={{ color: 'var(--orange)' }}>{s.step}</div>
+                    <div className="text-xs font-black uppercase tracking-tight mb-1" style={{ color: 'var(--foreground)' }}>{s.title}</div>
+                    <p className="text-xs font-medium leading-relaxed" style={{ color: 'var(--muted)' }}>{s.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* Testimonials */}

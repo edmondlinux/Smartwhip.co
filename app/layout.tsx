@@ -14,23 +14,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
   },
-  title: 'Buy SmartWhip 640g UK | Fast Same Day Delivery | From £29 |25mins delivery',
-  description: "UK's #1 official supplier of Smartwhip 640g canisters. Order now for delivery in under 25 minutes via WhatsApp, Telegram. Starting from just £29. Fast, reliable & discreet",
+  title: 'Smart Whip UK | SmartWhip 640g Same Day Delivery | From £30',
+  description: "Buy Smart Whip 640g cream chargers with same day delivery across the UK. SmartWhip, FastGas & Cream Deluxe — from £30. Order on WhatsApp or Telegram, 24/7.",
   keywords: [
-    'SmartWhip UK', 
-    'Buy Smartwhip online', 
-    'Smartwhip 640g', 
-    'Fastgas cylinders', 
-    'Cream Deluxe chargers', 
-    'Nitrous Oxide UK', 
-    'Cream chargers near me', 
-    'Smartwhip wholesale',
-    'Fastgas UK',
-    'Cream Deluxe UK',
-    'baloons UK',
-    'baloons near me',
     'smart whip',
-    'smartwhip'
+    'smartwhip',
+    'SmartWhip UK',
+    'smart whip same day delivery',
+    'cream chargers near me',
+    'cream charger delivery UK',
+    'SmartWhip 640g',
+    'buy smartwhip',
+    'smartwhip delivery',
+    'FastGas UK',
+    'Cream Deluxe UK',
+    'nos delivery',
+    'N2O cream chargers UK',
+    'smartwhip wholesale',
   ],
   icons: {
     icon: [
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: 'SmartWhip UK | Buy Smart Whip 640g Cylinders | Same-Day Delivery',
-    description: "UK's #1 SmartWhip supplier. Order smart whip, FastGas & Cream Deluxe 640g cylinders — delivered in under 25 minutes via WhatsApp. From £29. Order now.",
+    title: 'Smart Whip UK | SmartWhip 640g Same Day Delivery | From £30',
+    description: "Buy smart whip 640g cream chargers with same day delivery across the UK. SmartWhip, FastGas & Cream Deluxe — from £30. Order on WhatsApp or Telegram, 24/7.",
     type: 'website',
     url: baseUrl,
     images: [
@@ -65,8 +65,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'SmartWhip UK | Buy Smart Whip 640g Cylinders | Same-Day Delivery',
-    description: "UK's #1 SmartWhip supplier. Order smart whip, FastGas & Cream Deluxe 640g cylinders — delivered in under 25 minutes via WhatsApp. From £29. Order now.",
+    title: 'Smart Whip UK | SmartWhip 640g Same Day Delivery | From £30',
+    description: "Buy smart whip 640g cream chargers with same day delivery across the UK. SmartWhip, FastGas & Cream Deluxe — from £30. Order on WhatsApp or Telegram, 24/7.",
     images: ['/og_image/og_image.jpeg'],
   }
 };
