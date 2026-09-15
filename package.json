@@ -9,7 +9,7 @@
     ]
   },
   "scripts": {
-    "dev": "next dev --turbopack --port 5000",
+    "dev": "next dev --turbopack --port 3000",
     "build": "next build",
     "start": "next start",
     "db:setup": "npx tsx lib/db/setup.ts",

@@ -5,14 +5,16 @@ export function middleware(request: NextRequest) {
   const url = request.nextUrl.clone();
   const { hostname, protocol } = url;
 
-  // Redirect http -> https and www -> non-www
-  const isHttp = protocol === 'http:';
-  const isWww = hostname.startsWith('www.');
+  // Redirect http -> https and www -> non-www (production only — local dev has no TLS cert)
+  if (process.env.NODE_ENV === 'production') {
+    const isHttp = protocol === 'http:';
+    const isWww = hostname.startsWith('www.');
 
-  if (isHttp || isWww) {
-    url.protocol = 'https:';
-    url.hostname = isWww ? hostname.slice(4) : hostname;
-    return NextResponse.redirect(url, { status: 301 });
+    if (isHttp || isWww) {
+      url.protocol = 'https:';
+      url.hostname = isWww ? hostname.slice(4) : hostname;
+      return NextResponse.redirect(url, { status: 301 });
+    }
   }
 
   const response = NextResponse.next();
