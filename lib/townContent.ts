@@ -77,6 +77,10 @@ const HERO_SUBTITLES = [
   'Authentic SmartWhip cylinders — same-day delivery, guaranteed pure stock.',
   'Fast, discreet, and reliable — the way professional delivery should work.',
   'Top-tier N₂O cylinders sourced direct, delivered faster than anyone else.',
+  'Genuine stock, no substitutions — the standard UK kitchens expect.',
+  'Built for professional kitchens that can\'t afford to wait around.',
+  'Certified N₂O cylinders, dispatched the moment you message us.',
+  'The supplier UK caterers switch to and don\'t switch away from.',
 ];
 
 const HERO_BADGES = [
@@ -86,47 +90,86 @@ const HERO_BADGES = [
   'No. 1 for Speed & Quality',
   'Used by UK Restaurants',
   'Premium Grade, Fast Drop',
+  'Genuine Stock Guaranteed',
+  'Rated by Professionals',
 ];
 
-const LOCAL_INTRO_PARAGRAPHS = [
-  (city: string, admin: string, pop: string, region: Region) =>
-    `${city} sits at the heart of ${admin}, a high-demand area where catering professionals expect nothing less than rapid delivery of certified N₂O supplies. With over ${Number(pop).toLocaleString()} residents across the ${region} region, we built our ${city} operation to match local pace — stocked up, ready to move, and always available.`,
+/* --- Local intro paragraph: 3 independently-varying sentences, multiplied together --- */
 
-  (city: string, admin: string, pop: string, region: Region) =>
-    `Our ${city} coverage is designed for the pace of ${admin}. Whether you run a busy hospitality venue or operate as an independent professional, we hold deep stock levels and dispatch to any postcode across ${city} with the speed that the ${region} market demands.`,
-
-  (city: string, admin: string, pop: string, region: Region) =>
-    `${city} is one of our core delivery zones. The ${admin} area has a strong and growing demand for high-grade cream chargers, and our team is set up specifically to serve the ${Number(pop).toLocaleString()}-strong community here. Fast, consistent, and always genuine stock — that's the standard we hold ourselves to in ${region}.`,
-
-  (city: string, admin: string, pop: string, region: Region) =>
-    `We've been serving ${admin} long enough to understand what ${city} professionals need: authenticity, speed, and someone available when it counts. Our inventory is maintained specifically for the ${region} market, ensuring ${city} orders go out the door without delay.`,
-
-  (city: string, admin: string, pop: string, region: Region) =>
-    `The catering and hospitality scene in ${city} is competitive — and your suppliers need to keep up. That's why our ${admin} team maintains active stock 24 hours a day, dispatching directly across ${city} within our guaranteed delivery window. Over ${Number(pop).toLocaleString()} people call this area home; we make sure every one of them can count on us.`,
-
-  (city: string, admin: string, pop: string, region: Region) =>
-    `SmartWhip's ${city} hub was built around one principle: local professionals deserve local-speed delivery. Serving ${admin} and the wider ${region} corridor, we keep our stock rotated, our prices competitive, and our response time within the fastest in the country.`,
-
-  (city: string, admin: string, pop: string, region: Region) =>
-    `In a city like ${city}, standards are high. That's exactly why we hold dedicated stock for ${admin}, ensuring orders placed in ${city} are never waiting on a warehouse elsewhere. Pure, certified, and dispatched fast — the way the ${region} market expects.`,
-
-  (city: string, admin: string, pop: string, region: Region) =>
-    `${city} professionals have been relying on us for quick-turnaround N₂O delivery across the ${admin} area. Our coverage spans every postcode in ${city}, backed by round-the-clock availability and a commitment to never compromising on product quality in the ${region} region.`,
+const INTRO_OPENERS = [
+  (city: string, admin: string) => `${city} sits right in the heart of ${admin}, and we built our local operation to match the pace catering professionals expect here.`,
+  (city: string, admin: string) => `In ${city}, demand for reliable N₂O supply runs high — which is exactly why we maintain a dedicated presence across ${admin}.`,
+  (city: string, admin: string) => `${city} is one of our core coverage zones within ${admin}, chosen because the local hospitality scene never really slows down.`,
+  (city: string, admin: string) => `We've grown our ${admin} operation around cities like ${city}, where professional kitchens need a supplier they can actually rely on.`,
+  (city: string, admin: string) => `Ask any caterer in ${city} what matters most and speed comes up first — it's the standard we hold ourselves to across ${admin}.`,
+  (city: string, admin: string) => `${city} and the wider ${admin} area represent one of our busiest delivery corridors, and our stock levels reflect that.`,
+  (city: string, admin: string) => `${admin} has a strong, steady demand for high-grade cream chargers, with ${city} sitting right at the centre of it.`,
 ];
 
-const PRODUCT_DESC_640G = [
-  (city: string) => `The 640g SmartWhip cylinder is the benchmark for professional N₂O supply. Consistent pressure, 99.9% purity, and a capacity equal to 80+ standard cartridges — dispatched directly to you in ${city}.`,
-  (city: string) => `Industry standard for a reason: the SmartWhip 640g delivers reliable, high-purity N₂O every time. Our most popular single unit in ${city}, it's trusted by caterers, cafes, and independent professionals alike.`,
-  (city: string) => `One cylinder, maximum output. The SmartWhip 640g is engineered for consistent pressure delivery and unmatched N₂O purity. Fast dispatch to your ${city} address, every time.`,
-  (city: string) => `Our best-selling unit and the most requested product in ${city}. The 640g SmartWhip cylinder offers superior purity and the capacity professionals demand — ready to ship now.`,
+const INTRO_MIDDLES = [
+  (city: string, popNum: string, regionPhrase: string) => `With a population of roughly ${popNum}, ${city} needs a supplier that can move fast without cutting corners on authenticity.`,
+  (city: string, popNum: string, regionPhrase: string) => `We hold dedicated stock ${regionPhrase}, so orders placed in ${city} aren't waiting on a warehouse somewhere else in the country.`,
+  (city: string, popNum: string, regionPhrase: string) => `Serving a community of around ${popNum} people, we keep our ${city} operation stocked and ready around the clock.`,
+  (city: string, popNum: string, regionPhrase: string) => `Our stock rotation is planned specifically ${regionPhrase}, which keeps ${city} orders moving even during high-demand periods.`,
+  (city: string, popNum: string, regionPhrase: string) => `${city}'s roughly ${popNum}-strong population relies on a mix of independent kitchens and larger venues — we're set up to serve both.`,
+  (city: string, popNum: string, regionPhrase: string) => `Coverage ${regionPhrase} means ${city} customers get the same dispatch speed as our busiest metro areas.`,
+  (city: string, popNum: string, regionPhrase: string) => `We treat ${city} as a priority zone, not an afterthought — stock is held locally and refreshed constantly.`,
+  (city: string, popNum: string, regionPhrase: string) => `Whether it's a single cylinder or a bulk case order, our ${city} stock is maintained to handle both without delay.`,
 ];
 
-const PRODUCT_DESC_CASE = [
-  (admin: string) => `Six units, one delivery. The case pack is our best-value option for professionals and volume buyers across ${admin}. Stock your kitchen efficiently and save on every order.`,
-  (admin: string) => `The smart choice for regular users across ${admin}. Six SmartWhip 640g cylinders in one shipment — lower cost per unit and fewer reorders for busy kitchens.`,
-  (admin: string) => `Built for professionals who can't afford to run low. The 6× case pack covers serious N₂O demand across ${admin}, with the best per-unit price we offer.`,
-  (admin: string) => `Stock up and save. The 6-canister case pack is our most cost-efficient offering for wholesale buyers and consistent users in the ${admin} region.`,
+const INTRO_CLOSERS = [
+  (city: string) => `That's the standard we hold ourselves to — fast, genuine, and available whenever ${city} needs us.`,
+  (city: string) => `No shortcuts, no substitutions — just consistent, certified stock delivered on your schedule.`,
+  (city: string) => `It's a simple promise: message us, and your ${city} order is moving within minutes.`,
+  (city: string) => `We'd rather over-deliver on speed than make promises we can't keep in ${city}.`,
+  (city: string) => `That consistency is why so many ${city} kitchens keep coming back to us.`,
+  (city: string) => `Every order out of ${city} gets the same attention, regardless of size.`,
+  (city: string) => `We built this operation to be dependable first — everything else follows from that.`,
+  (city: string) => `Authenticity and speed aren't optional here; they're the baseline for every ${city} delivery.`,
+  (city: string) => `Simple, fast, and genuine — that's what ${city} customers can expect every time.`,
 ];
+
+/* --- Product descriptions: feature clause + city-specific close clause --- */
+
+const PRODUCT_640G_FEATURES = [
+  () => `The 640g SmartWhip cylinder delivers consistent pressure and 99.9% purity from the first charge to the last.`,
+  () => `One 640g cylinder replaces over 80 standard 8g cartridges, with none of the inconsistency.`,
+  () => `Every 640g unit is TUV certified and tested before it ever reaches a customer.`,
+  () => `Consistent output, food-grade purity, and none of the waste that comes with single-use cartridges.`,
+  () => `It's engineered for professional-volume use — steady pressure across the entire fill, not just the first few charges.`,
+  () => `99.9% pure N₂O, TUV certified, and built for kitchens that can't afford inconsistent results.`,
+];
+
+const PRODUCT_640G_CLOSES = [
+  (city: string) => `It's our most requested single unit in ${city}, and for good reason.`,
+  (city: string) => `Ready for same-day dispatch to any address in ${city}.`,
+  (city: string) => `Trusted by caterers and independent kitchens across ${city} alike.`,
+  (city: string) => `We keep it in stock specifically for fast turnaround orders in ${city}.`,
+  (city: string) => `It's the unit most ${city} customers reorder without thinking twice.`,
+  (city: string) => `Dispatched same-day, every time, to anywhere in ${city}.`,
+  (city: string) => `The benchmark unit for professional kitchens in and around ${city}.`,
+];
+
+const PRODUCT_CASE_FEATURES = [
+  () => `Six 640g cylinders in a single delivery — the most efficient way to keep a busy kitchen stocked.`,
+  () => `Better cost-per-unit, fewer reorders, and one delivery instead of six.`,
+  () => `Built for volume buyers who can't afford to run low mid-service.`,
+  () => `The case pack covers serious demand without the hassle of repeat ordering.`,
+  () => `Six units, one drop-off — the smart choice for regular users.`,
+  () => `Our best per-unit pricing, bundled into a single convenient shipment.`,
+];
+
+const PRODUCT_CASE_CLOSES = [
+  (admin: string) => `The preferred option for wholesale and trade buyers across ${admin}.`,
+  (admin: string) => `Popular with catering teams and events businesses across ${admin}.`,
+  (admin: string) => `Consistently our best-value pick for professionals in ${admin}.`,
+  (admin: string) => `Stocked specifically to serve high-volume buyers across ${admin}.`,
+  (admin: string) => `The go-to order size for busy venues across ${admin}.`,
+  (admin: string) => `A favourite among recurring customers throughout ${admin}.`,
+  (admin: string) => `Built for the pace of professional kitchens across ${admin}.`,
+];
+
+/* --- FAQ pool --- */
 
 const FAQ_POOL = [
   (city: string, admin: string) => ({
@@ -252,6 +295,71 @@ export function getNearbyTowns(
     .slice(0, limit);
 }
 
+/* --- Extra feature text: claim clause + detail clause --- */
+
+const EXTRA_FEATURE_CLAIMS = [
+  (city: string) => `Every shipment to ${city} is checked before it leaves — you won't receive anything that's failed our quality check.`,
+  (city: string) => `We run a strict zero-substitution policy in ${city}: if your exact product isn't in stock, we tell you upfront.`,
+  (city: string) => `Orders placed for ${city} get a confirmation message within minutes, so you're never left guessing.`,
+  (city: string) => `Our ${city} couriers are briefed on discreet handling — packaging is plain and professional, always.`,
+  (city: string) => `Repeat customers in ${city} get priority dispatch on every order after their first.`,
+  (city: string) => `We keep contingency stock earmarked for ${city}, so high-demand periods don't mean delays.`,
+  (city: string) => `${city} orders are handled by the same small team every time, so nothing gets lost in translation.`,
+];
+
+const EXTRA_FEATURE_DETAILS = [
+  (city: string, admin: string) => `It's a small thing, but it's the difference between a supplier you trust and one you don't.`,
+  (city: string, admin: string) => `That level of consistency is exactly what busy kitchens across ${admin} expect from us.`,
+  (city: string, admin: string) => `We'd rather be upfront about stock than let a ${city} customer down on delivery day.`,
+  (city: string, admin: string) => `It keeps the whole ${city} operation predictable, even when demand spikes.`,
+  (city: string, admin: string) => `Nothing about the process should feel uncertain — that's the whole point.`,
+  (city: string, admin: string) => `It's how we've built repeat business across ${admin}, one reliable delivery at a time.`,
+  (city: string, admin: string) => `Simple systems, followed properly — that's what keeps ${city} orders on time.`,
+  (city: string, admin: string) => `We'd sooner lose a sale than send the wrong product to a ${city} address.`,
+];
+
+/* --- About SmartWhip paragraph (replaces the previously-static page copy) --- */
+
+const ABOUT_OPENERS = [
+  (city: string, admin: string) => `SmartWhip has become the benchmark for high-capacity N₂O delivery across the UK, and ${city} is no exception.`,
+  (city: string, admin: string) => `Cafes, restaurants, and professional kitchens in ${city} choose SmartWhip because it delivers exactly what it promises.`,
+  (city: string, admin: string) => `In ${city}, SmartWhip has built a reputation for consistency that cheaper alternatives just can't match.`,
+  (city: string, admin: string) => `${city}'s catering scene has increasingly standardised on SmartWhip for one simple reason: it's reliable.`,
+  (city: string, admin: string) => `SmartWhip's reputation across ${admin} rests on the same thing every time — genuine stock, delivered fast.`,
+  (city: string, admin: string) => `For professional kitchens in ${city}, SmartWhip isn't just a brand — it's the safe, predictable choice.`,
+  (city: string, admin: string) => `${city} venues that switch to SmartWhip rarely go back to their old supplier.`,
+];
+
+const ABOUT_CLOSES = [
+  (city: string, admin: string) => `We also carry FastGas and Cream Deluxe for ${city} customers who want alternatives or specific preferences.`,
+  (city: string, admin: string) => `Alongside SmartWhip, we stock FastGas and Cream Deluxe — genuine, certified, and available across ${admin}.`,
+  (city: string, admin: string) => `FastGas and Cream Deluxe are also in stock for anyone in ${city} who prefers a different brand.`,
+  (city: string, admin: string) => `We keep FastGas and Cream Deluxe on hand too, so ${city} customers always have a genuine alternative.`,
+  (city: string, admin: string) => `If SmartWhip isn't your preference, FastGas and Cream Deluxe are both available to ${admin} customers.`,
+  (city: string, admin: string) => `Four brands, one standard: genuine stock, fast dispatch, no exceptions — that's how we serve ${city}.`,
+];
+
+/* --- Near Me paragraph (replaces the previously-static page copy) --- */
+
+const NEAR_ME_OPENERS = [
+  (city: string) => `If you're searching for cream chargers near you in ${city}, you've found the right supplier.`,
+  (city: string) => `Looking for same-day cream charger delivery in ${city}? This is where that search ends.`,
+  (city: string) => `${city} customers searching for a reliable cream charger supplier land here for a reason.`,
+  (city: string) => `Whether you searched "cream chargers near me" or found us directly, ${city} is fully covered.`,
+  (city: string) => `${city} residents and businesses alike use us as their go-to for fast N₂O delivery.`,
+  (city: string) => `No need to keep searching — we're already set up to serve ${city} directly.`,
+];
+
+const NEAR_ME_CLOSES = [
+  (city: string, admin: string) => `We deliver SmartWhip, FastGas, and Cream Deluxe 640g cylinders directly to any address in ${city} and across ${admin} — the same day you order, 24 hours a day.`,
+  (city: string, admin: string) => `Message us with your postcode in ${city} and we'll confirm stock and dispatch time within minutes, any hour of the day.`,
+  (city: string, admin: string) => `No shop visit, no waiting around — just message us on WhatsApp or Telegram and your ${city} order is on its way.`,
+  (city: string, admin: string) => `Coverage spans every postcode in ${city} and the wider ${admin} area, with dispatch running 24/7.`,
+  (city: string, admin: string) => `Same-day delivery is standard for ${city}, not an upgrade — just tell us where and we'll handle the rest.`,
+  (city: string, admin: string) => `We dispatch to ${city} and all of ${admin} around the clock, so timing is never the blocker.`,
+  (city: string, admin: string) => `From first message to delivery, most ${city} orders are sorted within the hour.`,
+];
+
 export interface TownContentResult {
   region: Region;
   citySize: CitySize;
@@ -264,6 +372,8 @@ export interface TownContentResult {
   faqs: { q: string; a: string }[];
   testimonials: typeof TESTIMONIALS;
   extraFeatureText: string;
+  aboutParagraph: string;
+  nearMeParagraph: string;
   regionPhrase: string;
 }
 
@@ -280,42 +390,52 @@ const REGION_PHRASES: Record<Region, string> = {
   NorthernIreland: 'across Northern Ireland',
 };
 
-const EXTRA_FEATURE_TEXTS = [
-  (city: string) => `Our ${city} team verifies every shipment before dispatch — you'll never receive a product that hasn't passed our quality check.`,
-  (city: string) => `We maintain a zero-substitution policy in ${city}: if your exact product isn't available, we'll tell you upfront rather than send an alternative without asking.`,
-  (city: string) => `Every order placed for ${city} gets a confirmation message within minutes. No waiting, no uncertainty — just fast, clear service.`,
-  (city: string) => `Our ${city} couriers are briefed on discreet delivery. Packaging is plain, professional, and never draws attention.`,
-  (city: string) => `Repeat customers in ${city} benefit from priority dispatch. Once you've ordered with us, your next drop is always faster.`,
-  (city: string) => `We carry contingency stock specifically for ${city} — so even during high-demand periods, your order won't be delayed.`,
-];
-
 export function buildTownContent(town: TownMeta): TownContentResult {
   const { city, admin_name, population, lat, lng } = town;
   const region = getRegion(lat, lng, admin_name);
   const citySize = getCitySize(population);
   const deliveryTime = getDeliveryTime(citySize);
+  const popNum = Number(population).toLocaleString();
+  const regionPhrase = REGION_PHRASES[region];
 
   const heroSubtitle = pick(HERO_SUBTITLES, city);
   const heroBadge = pick(HERO_BADGES, city, 3);
 
-  const localIntroFn = pick(LOCAL_INTRO_PARAGRAPHS, city, 1);
-  const localIntroParagraph = localIntroFn(city, admin_name, population, region);
+  const localIntroParagraph = [
+    pick(INTRO_OPENERS, city, 10)(city, admin_name),
+    pick(INTRO_MIDDLES, city, 11)(city, popNum, regionPhrase),
+    pick(INTRO_CLOSERS, city, 12)(city),
+  ].join(' ');
 
-  const productDesc640gFn = pick(PRODUCT_DESC_640G, city, 2);
-  const productDesc640g = productDesc640gFn(city);
+  const productDesc640g = [
+    pick(PRODUCT_640G_FEATURES, city, 30)(),
+    pick(PRODUCT_640G_CLOSES, city, 31)(city),
+  ].join(' ');
 
-  const productDescCaseFn = pick(PRODUCT_DESC_CASE, city, 5);
-  const productDescCase = productDescCaseFn(admin_name);
+  const productDescCase = [
+    pick(PRODUCT_CASE_FEATURES, city, 40)(),
+    pick(PRODUCT_CASE_CLOSES, city, 41)(admin_name),
+  ].join(' ');
 
   const faqFns = pickMany(FAQ_POOL, city, 5);
   const faqs = faqFns.map((fn) => fn(city, admin_name));
 
   const testimonials = pickMany(TESTIMONIALS, city, 3);
 
-  const extraFeatureFn = pick(EXTRA_FEATURE_TEXTS, city, 4);
-  const extraFeatureText = extraFeatureFn(city);
+  const extraFeatureText = [
+    pick(EXTRA_FEATURE_CLAIMS, city, 20)(city),
+    pick(EXTRA_FEATURE_DETAILS, city, 21)(city, admin_name),
+  ].join(' ');
 
-  const regionPhrase = REGION_PHRASES[region];
+  const aboutParagraph = [
+    pick(ABOUT_OPENERS, city, 50)(city, admin_name),
+    pick(ABOUT_CLOSES, city, 51)(city, admin_name),
+  ].join(' ');
+
+  const nearMeParagraph = [
+    pick(NEAR_ME_OPENERS, city, 60)(city),
+    pick(NEAR_ME_CLOSES, city, 61)(city, admin_name),
+  ].join(' ');
 
   return {
     region,
@@ -329,6 +449,8 @@ export function buildTownContent(town: TownMeta): TownContentResult {
     faqs,
     testimonials,
     extraFeatureText,
+    aboutParagraph,
+    nearMeParagraph,
     regionPhrase,
   };
 }

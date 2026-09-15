@@ -543,9 +543,7 @@ export default async function TownPage({ params }: Props) {
                 Premium N₂O Cylinders for {townData.city}
               </h2>
               <p className="text-sm font-medium leading-relaxed mb-6" style={{ color: 'var(--muted)' }}>
-                SmartWhip has become the benchmark for high-capacity N₂O delivery across the UK. Cafes, restaurants, professional
-                kitchens, and event caterers in {townData.city} rely on us because we consistently deliver what we promise — genuine
-                cylinders, fast. We also carry FastGas and Cream Deluxe for customers in {townData.admin_name} who require alternatives.
+                {content.aboutParagraph}
               </p>
               <ul className="space-y-3">
                 {[
@@ -572,10 +570,7 @@ export default async function TownPage({ params }: Props) {
                 Same Day Cream Charger Delivery in {townData.city}
               </h2>
               <p className="text-sm font-medium leading-relaxed mb-6" style={{ color: 'var(--muted)' }}>
-                If you&apos;re searching for cream chargers near you in {townData.city}, you&apos;ve found the right supplier.
-                We deliver SmartWhip, FastGas, and Cream Deluxe 640g N₂O cylinders directly to any address in {townData.city}
-                and across {townData.admin_name} — the same day you order, 24 hours a day. No shop visit, no waiting. Just
-                message us on WhatsApp or Telegram with your postcode and we&apos;ll have your order on the way.
+                {content.nearMeParagraph}
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {[

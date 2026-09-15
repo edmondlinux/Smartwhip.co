@@ -364,37 +364,72 @@ export default function HomePage() {
       <main className="flex-grow">
 
         {/* HERO */}
-        <section>
-          <a href="#directory" className="hidden lg:block w-full">
-            <Image
-              src="/hero_image.png"
-              alt="SmartWhip — Europe's Leading Brand of N2O. Elevate your experience."
-              width={1920}
-              height={1080}
-              className="w-full h-auto block"
-              priority
-            />
-          </a>
-          <a href="#directory" className="lg:hidden block w-full">
-            <Image
-              src="/hero_image_mobile.png"
-              alt="SmartWhip — Europe's Leading Brand of N2O. Elevate your experience."
-              width={750}
-              height={1100}
-              className="w-full h-auto block"
-              priority
-            />
-          </a>
-        </section>
+        <section className="relative overflow-hidden border-b" style={{ borderColor: 'var(--border)' }}>
+          <div className="absolute inset-0 noise-bg pointer-events-none" />
+          <div className="max-w-screen-xl mx-auto px-6 lg:px-10 py-16 lg:py-24 relative">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+              <div>
+                <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] mb-6"
+                  style={{ background: 'rgba(255,98,0,0.1)', color: 'var(--orange)' }}>
+                  <Star className="h-3 w-3" />
+                  UK&apos;s #1 Rated Supplier
+                </span>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-[1.05] mb-6" style={{ color: 'var(--foreground)' }}>
+                  SmartWhip & Smart Whip UK —{' '}
+                  <span style={{ color: 'var(--orange)' }}>Buy 640g Cylinders from £29</span>{' '}
+                  with Same-Day UK Delivery
+                </h1>
+                <p className="text-base font-medium leading-relaxed max-w-lg mb-8" style={{ color: 'var(--muted)' }}>
+                  99.9% pure food-grade N₂O. SmartWhip, FastGas, Cream Deluxe & GoldWhip — TUV/CE certified and dispatched same-day, UK-wide. Order on WhatsApp or Telegram, 24/7.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href={waLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-black uppercase tracking-widest text-white transition-all hover:opacity-90"
+                    style={{ background: '#25D366' }}
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    Order via WhatsApp
+                  </a>
+                  <a
+                    href="#directory"
+                    className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl text-sm font-black uppercase tracking-widest border transition-all hover:border-orange-500/50"
+                    style={{ borderColor: 'var(--border)', color: 'var(--foreground)', background: 'var(--surface)' }}
+                  >
+                    <MapPin className="h-4 w-4" />
+                    Find Your Town
+                  </a>
+                </div>
+              </div>
 
-        {/* PAGE H1 */}
-        <section className="border-b" style={{ borderColor: 'var(--border)', background: 'var(--surface)' }}>
-          <div className="max-w-screen-xl mx-auto px-6 lg:px-10 py-6">
-            <h1 className="text-xl md:text-2xl font-black uppercase tracking-tight" style={{ color: 'var(--foreground)' }}>
-              SmartWhip & Smart Whip UK —{' '}
-              <span style={{ color: 'var(--orange)' }}>Buy 640g Cylinders from £29</span>{' '}
-              with Same-Day UK Delivery
-            </h1>
+              <div className="relative flex items-center justify-center py-4 lg:py-0">
+                <div
+                  className="absolute w-72 h-72 lg:w-96 lg:h-96 rounded-full pointer-events-none"
+                  style={{ background: 'radial-gradient(circle, var(--orange-glow) 0%, transparent 70%)' }}
+                />
+                <div
+                  className="relative rounded-[2.5rem] p-8 lg:p-10 animate-float"
+                  style={{ background: '#ffffff', boxShadow: '0 30px 80px rgba(0,0,0,0.55)' }}
+                >
+                  <Image
+                    src="/products/smartwhip.jpeg"
+                    alt="SmartWhip 640g N2O cream charger cylinder — same-day UK delivery"
+                    width={420}
+                    height={420}
+                    className="w-full max-w-[240px] lg:max-w-[300px] h-auto"
+                    priority
+                  />
+                  <span
+                    className="absolute -top-3 -right-3 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-white shadow-lg"
+                    style={{ background: 'var(--orange)' }}
+                  >
+                    Best Seller
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
